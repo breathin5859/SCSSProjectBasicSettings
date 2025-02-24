@@ -1,5 +1,6 @@
 @use "../abstracts/" as *;
 @use "sass:list";
+@use "sass:map";
 
 // 폼요소 공통디자인 정의
 $formSettings: (
@@ -23,6 +24,7 @@ $selectSetting: (
   "iconPosition": rem(12),
   "bgWidth": 6,
   "paddingInline": 12,
+  "iconWidth": 10,
 );
 
 // 라디오 & 체크박스 디자인 정의
@@ -37,24 +39,24 @@ $radioCheckSetting: (
 );
 
 %form {
-  height: map-get($formSettings, height);
-  border: map-get($formSettings, border);
+  height: map.get($formSettings, height);
+  border: map.get($formSettings, border);
   box-sizing: border-box;
-  border-radius: map-get($formSettings, borderRadius);
-  background-color: map-get($formSettings, bgColor);
-  padding-inline: map-get($formSettings, paddingInline);
-  color: map-get($formSettings, fontColor);
-  font-size: map-get($formSettings, fontSize);
-  line-height: map-get($formSettings, lineHeight);
-  letter-spacing: map-get($formSettings, letterSpacing);
+  border-radius: map.get($formSettings, borderRadius);
+  background-color: map.get($formSettings, bgColor);
+  padding-inline: map.get($formSettings, paddingInline);
+  color: map.get($formSettings, fontColor);
+  font-size: map.get($formSettings, fontSize);
+  line-height: map.get($formSettings, lineHeight);
+  letter-spacing: map.get($formSettings, letterSpacing);
   &::placeholder {
-    color: map-get($formSettings, placehodlerColor);
+    color: map.get($formSettings, placehodlerColor);
   }
   &:disabled {
-    background: map-get($formSettings, disabledBgColor);
+    background: map.get($formSettings, disabledBgColor);
   }
   &[readonly] {
-    background: map-get($formSettings, readonlyBgColor);
+    background: map.get($formSettings, readonlyBgColor);
   }
 }
 
@@ -75,10 +77,11 @@ $radioCheckSetting: (
   }
 
   .select {
-    $result: map-get($selectSetting, paddingInline) * 2 + map-get($selectSetting, bgWidth);
+    $result: map.get($selectSetting, paddingInline) * 2 + map.get($selectSetting, bgWidth);
 
     @extend %form;
-    @include background(map-get($selectSetting, bgUrl), right map-get($selectSetting, iconPosition) center);
+    @include background(map.get($selectSetting, bgUrl), right map.get($selectSetting, iconPosition) center, null, rem(map.get($selectSetting, iconWidth)));
+
     padding-right: rem($result);
     appearance: none;
     width: var(--w, 100%);
