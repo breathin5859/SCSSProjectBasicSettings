@@ -1,97 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <title>파일리스트</title>
     <meta charset="utf-8" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="header">
-        <h1>프로젝트이름</h1>
-        <div class="top clear">
-          <ul>
-            <li>구분 :</li>
-            <li><span class="state r"></span></li>
-            <li>반응형</li>
-            <li><span class="state w"></span></li>
-            <li>WEB</li>
-            <li><span class="state m"></span></li>
-            <li>모바일&nbsp;&nbsp;&nbsp;/</li>
-            <li>상태 :</li>
-            <li><span class="state end"></span></li>
-            <li>완료</li>
-            <li><span class="state ing"></span></li>
-            <li>진행중&nbsp;&nbsp;&nbsp;/</li>
-            <li><span class="state modify"></span></li>
-            <li>수정</li>
-          </ul>
-          <div class="status">
-            <span id="progress"><em></em></span> <span id="total"></span>
-          </div>
-        </div>
-      </header>
-      <div class="content">
-        <table>
-          <thead>
-            <tr>
-              <th>페이지</th>
-              <th>파일명</th>
-              <th>시작일</th>
-              <th>웹표준</th>
-              <th>호환성</th>
-              <th>웹접근성</th>
-              <th>구분</th>
-              <th>상태</th>
-              <th>참고사항</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="list">
-              <td>스타일가이드</td>
-              <td><a href="./pages/style.html" target="_blank">sytle.html</a></td>
-              <td>2024.00.00</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td><span class="state m"></span></td>
-              <td><span class="state ing"></span></td>
-              <td>
-                <p class="t_em"></p>
-              </td>
-            </tr>
-            <tr class="list">
-              <td>MAIN</td>
-              <td><a href="" target="_blank">.html</a></td>
-              <td>2024.00.00</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td><span class="state m"></span></td>
-              <td><span class="state ing"></span></td>
-              <td>
-                <p class="t_em"></p>
-              </td>
-            </tr>
-            <tr>
-              <td class="category" colspan="10">카테고리입력</td>
-            </tr>
-            <tr class="list">
-              <td>서브페이지이름</td>
-              <td><a href="" target="_blank">.html</a></td>
-              <td>2024.00.00</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td><span class="state m"></span></td>
-              <td><span class="state ing"></span></td>
-              <td>
-                <p class="t_em"></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
     <style type="text/css">
       * {
         margin: 0;
@@ -101,7 +12,7 @@
         font-style: normal;
       }
       a {
-        color: #000;
+        color: #4776d6;
         text-decoration: underline;
       }
       img {
@@ -132,10 +43,6 @@
         line-height: 1.5;
       }
 
-      .wrapper {
-        width: 100%;
-        margin: auto;
-      }
       table {
         border-bottom: 1px solid #f4f4f4;
         margin-bottom: 50px;
@@ -144,7 +51,6 @@
       h1 {
         font-size: 2rem;
         font-weight: normal;
-        margin: 40px 0;
       }
       h2 {
         font-size: 1rem;
@@ -154,8 +60,26 @@
       hr {
         margin-bottom: 50px;
       }
+
+      .wrapper {
+        width: 100%;
+        margin: auto;
+      }
+
+      .project-title {
+        margin: 40px 0;
+      }
+
+      .list-header .list {
+        padding: 0 0 50px 0;
+        line-height: 30px;
+      }
+
       table {
         tr {
+          &.--check {
+            background-color: #db425e20;
+          }
           &:last-child {
             td {
               border-bottom: none;
@@ -183,43 +107,23 @@
             border-bottom: 1px solid #f4f4f4;
             border-right: 1px solid #f4f4f4;
             color: #666;
-            &:first-child {
-              width: 20%;
+            &:nth-child(2) {
               padding-left: 20px;
               text-align: left;
             }
-            &:nth-of-type(2) {
-              width: 20%;
+            &:nth-child(3) {
+              padding-left: 20px;
+              text-align: left;
             }
-            &:nth-of-type(3) {
-              width: 10%;
-            }
-            &:nth-of-type(4) {
-              width: 5%;
-            }
-            &:nth-of-type(5) {
-              width: 5%;
-            }
-            &:nth-of-type(6) {
-              width: 5%;
-            }
-            &:nth-of-type(7) {
-              width: 5%;
-            }
-            &:nth-of-type(8) {
-              width: 5%;
-            }
-            &:nth-of-type(9) {
-              width: 5%;
-            }
+
             &:last-child {
-              width: 40%;
               text-align: left;
             }
 
             &:last-child {
               border-right: none;
             }
+
             a {
               display: block;
               width: 100%;
@@ -230,7 +134,8 @@
               padding: 10px;
               text-align: left;
               font-size: 15px;
-              background-color: #f9f9f9;
+              font-weight: bold;
+              background-color: #e4e3e3;
               color: #1d1e25;
               &:before {
                 position: absolute;
@@ -239,7 +144,7 @@
                 display: inline-block;
                 width: 3px;
                 height: 100%;
-                background-color: #d2d6de;
+                background-color: #9a9ca1;
                 content: "";
               }
             }
@@ -258,22 +163,10 @@
           display: flex;
           margin-right: 10px;
           line-height: 25px;
-          &:first-child,
-          &:nth-of-type(8) {
-            font-size: 1rem;
-          }
-          &:nth-of-type(2) span,
-          &:nth-of-type(4),
-          &:nth-of-type(6),
-          &:nth-of-type(9),
-          &:nth-of-type(11) {
-            text-align: center;
-            border-radius: 50%;
-          }
         }
       }
 
-      .header .list {
+      .list-header .list {
         padding: 0 0 50px 0;
         line-height: 30px;
       }
@@ -282,12 +175,15 @@
         color: #fff;
         width: 25px;
         height: 25px;
-        border-radius: 50%;
+        border-radius: 999px;
         line-height: 25px;
+        text-align: center;
         &.r {
+          padding-inline: 10px;
           background-color: #a55eea;
+          width: max-content;
           &::before {
-            content: "R";
+            content: "Responsive";
           }
         }
         &.w {
@@ -303,7 +199,7 @@
           }
         }
         &.end {
-          background-color: #eb3b5a;
+          background-color: #db425e;
           font-weight: bold;
           &::before {
             content: "완";
@@ -316,6 +212,14 @@
             content: "진";
           }
         }
+        &.delete {
+          background-color: #0b0b0b;
+          color: #fff;
+          font-weight: bold;
+          &::before {
+            content: "X";
+          }
+        }
         &.modify {
           padding: 0 5px;
           border-radius: 30px;
@@ -323,7 +227,7 @@
           background-color: #39c4cd;
           text-align: center;
           &::before {
-            content: "수정";
+            content: "수";
           }
         }
         span {
@@ -379,17 +283,216 @@
         float: right;
       }
     </style>
+  </head>
+  <body>
+    <div class="pub-list wrappe">
+      <header class="list-header">
+        <div class="project-title">
+          <span class="state r"></span>
+          <h1 class="">프로젝트명</h1>
+        </div>
+        <div class="top clear">
+          <ul>
+            <li>상태 :</li>
+            <li><span class="state end"></span></li>
+            <li>완료</li>
+            <li><span class="state ing"></span></li>
+            <li>진행중&nbsp;&nbsp;&nbsp;/</li>
+            <li><span class="state modify"></span></li>
+            <li>수정</li>
+          </ul>
+          <div class="status">
+            <span id="progress"><em></em></span> <span id="total"></span>
+          </div>
+        </div>
+      </header>
+      <div class="content">
+        <table>
+          <colgroup>
+            <col width="5%" />
+            <col width="30%" />
+            <col width="20%" />
+            <col width="10%" />
+            <col width="5%" />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>페이지</th>
+              <th>파일</th>
+              <th>완료일</th>
+              <th>상태</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody id="fileListBody"></tbody>
+        </table>
+      </div>
+    </div>
     <script>
-      const content = document.querySelector(".content table");
-      const graph = document.querySelector("#progress em");
+      const groups = [
+        //  스타일가이드
+        {
+          title: "Style",
+          includeInProgress: false,
+          pages: [
+            {
+              page: "스타일가이드",
+              href: "./pages/style.html",
+              fileName: "style.html",
+              doneDate: "-",
+              state: "",
+              note: "",
+            },
+          ],
+        },
+        {
+          title: "공통",
+          pages: [
+            {
+              page: "파일명",
+              href: "./pages/.html",
+              fileName: ".html",
+              doneDate: "2026.00.00",
+              state: "",
+              note: "",
+            },
+          ],
+        },
+
+        // Group
+        {
+          title: "파일명",
+          pages: [
+            {
+              page: "파일명",
+              href: "./pages/.html",
+              fileName: ".html",
+              doneDate: "2026.00.00",
+              state: "",
+              note: [{ text: "26.00.00 note" }],
+              check: false,
+            },
+          ],
+        },
+      ];
+
+      const tbody = document.querySelector("#fileListBody");
+      const graphBar = document.querySelector("#progress em");
       const graphTotal = document.querySelector("#total");
-      const total = content.querySelectorAll(".list").length;
-      const finish = content.querySelectorAll(".list .end").length;
-      const progress = Math.floor((finish / total) * 100);
-      graph.style.width = progress + "%";
+
+      let noIndex = 0;
+
+      //  진행률 계산 대상: 그룹이 포함(true)이고, 그 안의 page들을 펼쳐서(flat) 모음
+      const progressTargets = groups
+        .filter((group) => group.includeInProgress !== false)
+        .flatMap((group) => group.pages);
+
+      const total = progressTargets.length;
+
+      const finish = progressTargets.filter(
+        (item) => item.state === "end",
+      ).length;
+
+      const progress = total === 0 ? 0 : Math.floor((finish / total) * 100);
+
+      graphBar.style.width = progress + "%";
       graphTotal.innerHTML = `
-            ${finish} / ${total}page <span class='percent'>진행률 ${progress}%</span>
-        `;
+        ${finish} / ${total} page
+        <span class="percent">진행률 ${progress}%</span>
+      `;
+
+      const createCategoryRow = (title) => {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+
+        td.className = "category";
+        td.colSpan = 6;
+        td.textContent = title;
+
+        tr.appendChild(td);
+
+        return tr;
+      };
+
+      const createPageRow = (item, isProgressIncluded) => {
+        const tr = document.createElement("tr");
+        tr.className = "list";
+
+        if (item.check === true) {
+          tr.classList.add("--check");
+        }
+
+        if (!item.href) {
+          tr.classList.add("none");
+        }
+
+        //  진행률 포함되는 그룹일 때만 No 증가
+        if (isProgressIncluded) {
+          noIndex += 1;
+        }
+
+        const noText = isProgressIncluded ? String(noIndex) : "";
+
+        tr.innerHTML = `
+              <td>${noText}</td>
+              <td>${item.page ?? ""}</td>
+              <td>
+                ${
+                  item.href
+                    ? `<a href="${item.href}" target="_blank">${item.fileName ?? item.href}</a>`
+                    : `<a href="javascript:void(0)" tabindex="-1">${item.fileName ?? ""}</a>`
+                }
+              </td>
+              <td>${item.doneDate ?? ""}</td>
+              <td><span class="state ${item.state ?? ""}"></span></td>
+              <td class="note-cell"></td>
+            `;
+
+        const noteTd = tr.querySelector(".note-cell");
+
+        const rawNote = item ? item.note : null;
+
+        const noteLines = Array.isArray(rawNote)
+          ? rawNote
+          : typeof rawNote === "string" && rawNote.trim() !== ""
+            ? [{ text: rawNote, className: "" }]
+            : [];
+
+        noteLines.forEach(function (noteItem) {
+          const p = document.createElement("p");
+
+          const text =
+            noteItem && typeof noteItem.text === "string" ? noteItem.text : "";
+
+          p.textContent = text;
+
+          const className =
+            noteItem && typeof noteItem.className === "string"
+              ? noteItem.className.trim()
+              : "";
+
+          if (className !== "") {
+            p.classList.add(className);
+          }
+
+          noteTd.appendChild(p);
+        });
+
+        return tr;
+      };
+
+      //  렌더링: 그룹 단위로 카테고리 1줄 + 그 아래 페이지들
+      groups.forEach((group) => {
+        const isProgressIncluded = group.includeInProgress !== false;
+
+        tbody.appendChild(createCategoryRow(group.title));
+
+        group.pages.forEach((page) => {
+          tbody.appendChild(createPageRow(page, isProgressIncluded));
+        });
+      });
     </script>
   </body>
 </html>
