@@ -1,6 +1,6 @@
-@use "../variable" as *;
+$url: "../images/"; // 이미지 경로
 
-@mixin background($filename, $coordinate: null, $bgcolor: null, $bgsize: contain) {
-  background: url(#{$imgurl}#{$filename}) no-repeat $coordinate $bgcolor;
-  background-size: $bgsize;
+@mixin background($file, $coordinate: null, $color: null, $size: contain) {
+  background: url(#{$url}#{$file}) no-repeat $coordinate $color;
+  background-size: $size;
 }

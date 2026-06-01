@@ -1,6 +1,20 @@
 @mixin container($name, $size) {
-  @container #{$name} ( width < #{$size}) {
+  @if string != type-of($name) {
+    @error "String : 컨테이너 이름을 넣으세요. (예: main)";
+  } @else if number != type-of($size) {
+    @error "Number : 컨테이너 범위의 기준값을 넣으세요. ( width < 값 )";
+  }
+
+  // 미지원 브라우저 Fallback
+  @media (max-width: #{$size - 1px}) {
     @content;
+  }
+
+  // 컨테이너 쿼리 지원 브라우저
+  @supports (container-type: inline-size) {
+    @container #{$name} (width < #{$size}) {
+      @content;
+    }
   }
 }
 

@@ -11,3 +11,22 @@
     border-radius: rem($radius);
   }
 }
+
+// 쌤 수정본
+// @mixin scroll($direction, $size, $color, $radius) {
+//   &::-webkit-scrollbar {
+//     @if $direction == "right" {
+//         width: $size;
+//     } @else if $direction == "bottom" {
+//         height: $size;
+//     }
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     width: $size;
+//     background-color: $color;
+//     border-radius: $radius;
+//   }
+// }
+
+// ex) @include scroll(r, 10px, rgba(0,0,0,.5), 10px)
