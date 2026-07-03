@@ -6,6 +6,12 @@
 npx degit breathin5859/SCSSProjectBasicSettings .
 ```
 
+## git 주소 초기셋팅이라면
+
+```bash
+npx degit breathin5859/SCSSProjectBasicSettings . --force
+```
+
 ### 설치순서
 
 1. VScode에서 프로젝트 폴더를 오픈합니다.

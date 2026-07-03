@@ -1,0 +1,7 @@
+@use "../function" as *;
+
+@mixin text($size, $weight, $color: null) {
+  font-size: rem($size);
+  font-weight: $weight;
+  color: $color;
+}

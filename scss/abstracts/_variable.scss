@@ -1,4 +1,33 @@
+// 이미지 경로
+$imgUrl: "../images/";
+
 //반응형기준
 $mobile: 0;
 $tablet: 1024px;
 $web: 1280px;
+
+// $maxWidth: 560;
+
+//
+$font-base:
+  "Pretendard Variable",
+  Pretendard,
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  Roboto,
+  "Helvetica Neue",
+  "Segoe UI",
+  "Apple SD Gothic Neo",
+  "Noto Sans KR",
+  "Malgun Gothic",
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  sans-serif;
+
+// Radius
+// $radius-xxs: 4;
+// $radius-xs: 8;
+// $radius-sm: 12;
+// $radius-full: 999;

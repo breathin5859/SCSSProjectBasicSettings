@@ -1,0 +1,14 @@
+@use "./background" as *;
+@use "../function" as *;
+@use "sass:map";
+
+@mixin textIcon($varName, $index) {
+  &#{map.get($varName, $index, className)} {
+    &::#{map.get($varName, $index, direction)} {
+      @include background(map.get($varName, $index, imgName));
+      content: "";
+      width: rem(map.get($varName, $index, width));
+      height: rem(map.get($varName, $index, height));
+    }
+  }
+}

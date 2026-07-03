@@ -1,0 +1,255 @@
+@use "./a11y-hidden" as *;
+@use "./background" as *;
+@use "../variable" as *;
+@use "sass:map";
+
+// 토글스위치
+@mixin toggle($mapName, $index) {
+  $w: map.get($mapName, $index, width);
+  $h: map.get($mapName, $index, height);
+  $pad: map.get($mapName, $index, padding);
+  $offBg: map.get($mapName, $index, bgColor);
+  $onBg: map.get($mapName, $index, onBgColor);
+  $knobW: map.get($mapName, $index, toggleWidth);
+  $knobH: map.get($mapName, $index, toggleHeight);
+  $knobBg: map.get($mapName, $index, toggleColor);
+  $knobActiveBg: map.get($mapName, $index, toggleActiveColor);
+  $shadow: map.get($mapName, $index, shadow);
+  $ft: map.get($mapName, $index, fontSize);
+  $moveX: $w - ($pad * 2) - $knobW; // toggle 이동 거리
+
+  // disabled
+  $dis: map.get($mapName, $index, disabledBg);
+  $disKnoBg: map.get($mapName, $index, disabledKnoColor);
+  $onDis: map.get($mapName, $index, onDisabledBg);
+  $ftSm: map.get($mapName, $index, fontSizeSm);
+
+  // size:sm
+  $wSm: map.get($mapName, $index, widthSm);
+  $hSm: map.get($mapName, $index, heightSm);
+  $knobPadSm: map.get($mapName, $index, paddingSm);
+  $knobWSm: map.get($mapName, $index, toggleWidthSm);
+  $knobHSm: map.get($mapName, $index, toggleHeightSm);
+  $moveXSm: $wSm - ($knobPadSm * 2) - $knobWSm; // toggle 이동 거리
+
+  // 박스쉐도우
+  $knobShadow: map.get($mapName, $index, knobShadow);
+
+  #{map.get($mapName, $index, className)} {
+    @include a11y-hidden;
+    + label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: $w;
+      height: $h;
+      padding: $pad;
+      background-color: $offBg;
+      border-radius: 999px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: $pad;
+        top: $pad;
+        width: $knobW;
+        height: $knobW;
+        background:
+          url("#{$imgUrl}#{map.get($mapName, $index, toggleImage)}") no-repeat
+            center,
+          $knobBg;
+        border-radius: 999px;
+        transition: transform 0.25s ease;
+        will-change: transform;
+
+        // 박스쉐도우
+        @if $knobShadow {
+          box-shadow: $knobShadow;
+        }
+
+        // 이미지
+        @if map.get($mapName, $index, toggleImage) !=
+          null and
+          map.get($mapName, $index, toggleImage) !=
+          ""
+        {
+          background:
+            url("#{$imgUrl}#{map.get($mapName, $index, toggleImage)}")
+              no-repeat
+              center,
+            $knobBg;
+        } @else {
+          background: $knobBg;
+        }
+      }
+
+      + .label {
+        font-size: $ft;
+      }
+    }
+
+    &:checked {
+      + label {
+        background-color: $onBg;
+        &::after {
+          transform: translateX($moveX);
+          background-color: $knobActiveBg;
+        }
+      }
+    }
+
+    &:disabled {
+      + label {
+        background: $dis;
+        &::after {
+          background-color: $disKnoBg;
+        }
+      }
+    }
+    &:checked:disabled {
+      + label {
+        background: $onDis;
+      }
+    }
+
+    &.sm {
+      + label {
+        width: $wSm;
+        height: $hSm;
+        padding: $knobPadSm;
+        &::after {
+          width: $knobWSm;
+          height: $knobWSm;
+          left: $knobPadSm;
+          top: $knobPadSm;
+        }
+
+        + .label {
+          font-size: $ftSm;
+          line-height: 1;
+        }
+      }
+
+      &:checked {
+        + label {
+          &::after {
+            transform: translateX($moveXSm);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 토글텍스트
+@mixin toggleText($mapName, $index) {
+  $wPad: map.get($mapName, $index, wPadding);
+  $wBg: map.get($mapName, $index, wBg);
+  $wRa: map.get($mapName, $index, wRadius);
+
+  $pad: map.get($mapName, $index, padding);
+  $ra: map.get($mapName, $index, radius);
+  $co: map.get($mapName, $index, fontColor);
+  $onBg: map.get($mapName, $index, onBgColor);
+  $onCo: map.get($mapName, $index, onColor);
+  $ft: map.get($mapName, $index, fontSize);
+  $fw: map.get($mapName, $index, fontWeight);
+
+  // disabled
+  $dis: map.get($mapName, $index, disabledBg);
+  $disBor: map.get($mapName, $index, disabledBorder);
+  $disCo: map.get($mapName, $index, disabledCo);
+  $disCkCo: map.get($mapName, $index, disabledCkCo);
+
+  // round
+  $rPad: map.get($mapName, $index, rPadding);
+
+  #{map.get($mapName, $index, className)} {
+    display: inline-flex;
+    padding: $wPad;
+    background-color: $wBg;
+    border-radius: $wRa;
+    border: 1px solid $wBg;
+    &:has(:disabled) {
+      border-color: $disBor;
+    }
+    &.round {
+      border-radius: 999px;
+      input[type="radio"] {
+        + label {
+          padding: $rPad;
+          &::after {
+            border-radius: 999px;
+          }
+        }
+      }
+    }
+
+    input[type="radio"] {
+      @include a11y-hidden;
+
+      + label {
+        overflow: hidden;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: $pad;
+        border-radius: $ra;
+        font-size: $ft;
+        font-weight: $fw;
+        color: $co;
+        line-height: 1.4;
+        box-sizing: border-box;
+        transition: color 0.25s ease;
+        cursor: pointer;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          background: $onBg;
+          border-radius: inherit;
+          transform: scale(0.95, 0.85);
+          transition:
+            transform 0.25s ease,
+            opacity 0.25s ease;
+          will-change: transform;
+          opacity: 0;
+        }
+
+        span {
+          position: relative;
+          z-index: 1;
+        }
+      }
+
+      &:checked {
+        + label {
+          color: $onCo;
+
+          &::after {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      }
+
+      &:disabled {
+        + label {
+          color: $disCo;
+        }
+      }
+      &:checked:disabled {
+        + label {
+          color: $disCkCo;
+          &::after {
+            background: $dis;
+          }
+        }
+      }
+    }
+  }
+}
