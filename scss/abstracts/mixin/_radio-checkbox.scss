@@ -5,7 +5,8 @@
 @mixin RadioCheckbox($mapName, $index) {
   #{map.get($mapName, $index, className)} {
     @include a11y-hidden;
-    + label {
+
+    + .label {
       @extend %label;
 
       &::before {
@@ -13,12 +14,33 @@
         content: "";
         width: map.get($mapName, $index, width);
         height: map.get($mapName, $index, height);
+        flex: 0 0 auto;
       }
     }
+
     &:checked {
-      + label {
+      + .label {
         &::before {
           @include background(map.get($mapName, $index, onImage));
+        }
+      }
+    }
+
+    &:disabled {
+      + .label {
+        cursor: not-allowed;
+        color: ft("disabled");
+
+        &::before {
+          @include background(map.get($mapName, $index, disabledImage));
+        }
+      }
+    }
+
+    &:checked:disabled {
+      + .label {
+        &::before {
+          @include background(map.get($mapName, $index, checkedDisabledImage));
         }
       }
     }
