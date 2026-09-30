@@ -1,33 +1,121 @@
 @use "./background" as *;
 @use "../function" as *;
+@use "../variable" as *;
 @use "sass:map";
 
-@mixin buttonSize($varName, $index) {
-  &.#{map.get($varName, $index, className)} {
-    height: rem(map.get($varName, $index, height));
-    font-size: rem(map.get($varName, $index, fontSize));
-    padding-inline: rem(map.get($varName, $index, paddingInline));
-    border: rem(map.get($varName, $index, borderWidth)) solid;
-    font-weight: map.get($varName, $index, fontWeight);
+//사이즈
+@mixin buttonSize($sizes, $name) {
+  $data: map.get($sizes, $name);
+
+  @if $data == null {
+    @error "버튼 사이즈 '#{$name}'이 맵에 없습니다.";
   }
-}
-//색상
-@mixin buttonColor($varName, $index) {
-  &#{map.get($varName , $index, className)} {
-    background-color: map.get($varName, $index, bgColor);
-    color: map.get($varName, $index, color);
-    border-color: map.get($varName, $index, borderColor);
+
+  &.#{$name} {
+    height: rem(map.get($data, height));
+    padding-inline: rem(map.get($data, paddingInline));
+    border-width: rem(map.get($data, borderWidth));
+    border-style: solid;
+    font-size: rem(map.get($data, fontSize));
+    font-weight: map.get($data, fontWeight);
   }
 }
 
-//아이콘
-@mixin buttonIcon($varName, $index) {
-  &#{map.get($varName, $index, className)} {
-    &::#{map.get($varName, $index, direction)} {
-      @include background(map.get($varName, $index, imgName));
-      content: "";
-      width: rem(map.get($varName, $index, widht));
-      height: rem(map.get($varName, $index, height));
+// 색상
+@mixin buttonColor($colors, $name) {
+  $data: map.get($colors, $name);
+
+  @if $data == null {
+    @error "버튼 색상 '#{$name}'이 맵에 없습니다.";
+  }
+
+  &.#{$name} {
+    background-color: map.get($data, bgColor);
+    border-color: map.get($data, borderColor);
+    color: map.get($data, color);
+
+    &:hover:not(:disabled) {
+      background-color: map.get($data, hoverBgColor);
+      border-color: map.get($data, hoverBorderColor);
+      color: map.get($data, hoverColor);
+    }
+
+    &:active:not(:disabled) {
+      background-color: map.get($data, activeBgColor);
+      border-color: map.get($data, activeBorderColor);
+      color: map.get($data, activeColor);
+      // filter: map.get($data, activeFilter);
+    }
+
+    &:disabled {
+      background-color: map.get($data, disabledBgColor);
+      border-color: map.get($data, disabledBorderColor);
+      color: map.get($data, disabledColor);
     }
   }
 }
+
+// 아이콘
+
+@mixin buttonIcon($icons, $number) {
+  $data: map.get($icons, $number);
+
+  @if $data == null {
+    @error "버튼 아이콘 '#{$name}'이 맵에 없습니다.";
+  }
+
+  $direction: map.get($data, direction);
+  $pseudo: null;
+
+  @if $direction == b {
+    $pseudo: before;
+  } @else if $direction == a {
+    $pseudo: after;
+  } @else {
+    @error "아이콘 direction은 b 또는 a로 지정하세요.";
+  }
+
+  &.ico#{$number} {
+    &::#{$pseudo} {
+      content: "";
+      flex-shrink: 0;
+      width: rem(map.get($data, width));
+      height: rem(map.get($data, height));
+
+      background-color: currentColor;
+
+      -webkit-mask: url("#{$imgUrl}#{map.get($data, imgName)}") no-repeat center / contain;
+      mask: url("#{$imgUrl}#{map.get($data, imgName)}") no-repeat center / contain;
+    }
+  }
+}
+
+// @mixin buttonSize($varName, $index) {
+//   &.#{map.get($varName, $index, className)} {
+//     height: rem(map.get($varName, $index, height));
+//     font-size: rem(map.get($varName, $index, fontSize));
+//     padding-inline: rem(map.get($varName, $index, paddingInline));
+//     border: rem(map.get($varName, $index, borderWidth)) solid;
+//     font-weight: map.get($varName, $index, fontWeight);
+//   }
+// }
+// //색상
+// @mixin buttonColor($varName, $index) {
+//   &#{map.get($varName , $index, className)} {
+//     background-color: map.get($varName, $index, bgColor);
+//     color: map.get($varName, $index, color);
+//     border-color: map.get($varName, $index, borderColor);
+//   }
+// }
+
+// //아이콘
+// @mixin buttonIcon($varName, $index) {
+//   &#{map.get($varName, $index, className)} {
+//     &::#{map.get($varName, $index, direction)} {
+//       @include background(map.get($varName, $index, imgName));
+//       content: "";
+//       width: rem(map.get($varName, $index, width));
+//       height: rem(map.get($varName, $index, height));
+//     }
+//   }
+// }

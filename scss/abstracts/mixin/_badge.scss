@@ -1,20 +1,42 @@
 @use "../function" as *;
 @use "sass:map";
 
-@mixin badgeSize($varName, $index) {
-  &#{map.get($varName, $index, className)} {
-    height: rem(map.get($varName, $index, height));
-    font-size: rem(map.get($varName, $index, fontSize));
-    padding-inline: rem(map.get($varName, $index, paddingInline));
-    border: rem(map.get($varName, $index, borderWidth)) solid;
-    font-weight: map.get($varName, $index, fontWeight);
+// 크기
+@mixin badgeSize($sizes, $name) {
+  $data: map.get($sizes, $name);
+
+  @if $data == null {
+    @error "뱃지 사이즈 '#{$name}'이 맵에 없습니다.";
+  }
+
+  &.#{$name} {
+    height: rem(map.get($data, height));
+    padding-inline: rem(map.get($data, paddingInline));
+    font-size: rem(map.get($data, fontSize));
+    font-weight: map.get($data, fontWeight);
+
+    $borderWidth: map.get($data, borderWidth);
+
+    @if $borderWidth != null {
+      border-width: rem($borderWidth);
+      border-style: solid;
+    } @else {
+      border: none;
+    }
   }
 }
-//색상
-@mixin badgeColor($varName, $index) {
-  &#{map.get($varName , $index, className)} {
-    background-color: map.get($varName, $index, bgColor);
-    color: map.get($varName, $index, color);
-    border-color: map.get($varName, $index, borderColor);
+
+// 색상
+@mixin badgeColor($colors, $name) {
+  $data: map.get($colors, $name);
+
+  @if $data == null {
+    @error "뱃지 색상 '#{$name}'이 맵에 없습니다.";
+  }
+
+  &.#{$name} {
+    background-color: map.get($data, bgColor);
+    border-color: map.get($data, borderColor);
+    color: map.get($data, color);
   }
 }

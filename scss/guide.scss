@@ -1,19 +1,51 @@
-[name="guide"] {
-  summary {
-    background: #000;
-    color: #fff;
-    font-size: 20px;
-    padding: 10px;
-  }
-  ~ details {
-    margin-top: 20px;
-  }
-  &[open] {
-    border: 1px solid #000;
-
-    summary + * {
-      padding: 10px;
-      font-size: 16px;
-    }
-  }
+html {
+  overflow: unset;
 }
+
+body {
+  overflow: unset;
+}
+
+[name="guide"] summary {
+  background: #000;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px;
+}
+[name="guide"] ~ details {
+  margin-top: 20px;
+}
+[name="guide"][open] {
+  border: 1px solid #000;
+}
+[name="guide"][open] summary + * {
+  padding: 10px;
+  font-size: 16px;
+}
+[name="guide"] h2 {
+  font-weight: 900;
+  background-color: rgb(194, 194, 194);
+  padding: 5px;
+}
+[name="guide"] h2 ~ h2 {
+  margin-block: 20px 10px;
+}
+[name="guide"] h3 {
+  margin-block: 10px 5px;
+}
+[name="guide"] h4 {
+  margin-top: 5px;
+}
+[name="guide"] hr {
+  margin-block: 20px;
+  border-width: 1.5;
+}
+
+.style-wrap {
+  overflow: auto;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=guide.css.map */
